@@ -83,4 +83,82 @@ describe('unit test',()=> {
       expect(buildItems(inputs,allItems)).toEqual(countedItems);
     });
   });
+  describe('buildSubtotal',()=>{
+     let promotions=loadPromotions();
+
+
+    let cartItem=[
+      {
+        item: {
+          barcode: 'ITEM000001',
+          name: '雪碧',
+          unit: '瓶',
+          price: 3.00
+        },
+        count: 5
+      },
+      {
+        item:{
+          barcode: 'ITEM000003',
+          name: '荔枝',
+          unit: '斤',
+          price: 15.00},
+        count: 2
+      },
+      {
+        item:{
+          barcode: 'ITEM000005',
+          name: '方便面',
+          unit: '袋',
+          price: 4.50},
+        count: 3
+      }
+    ];
+    it('should return subtotalItems',()=>{
+      let subtotalItems=[
+        {
+          cartItem:
+          {
+            item: {
+              barcode: 'ITEM000001',
+              name: '雪碧',
+              unit: '瓶',
+              price: 3.00
+            },
+            count:5
+          },
+          subtotal:12.00,
+          saved:3.00
+        },
+
+        {
+          cartItem:
+          {
+            item:{
+              barcode: 'ITEM000003',
+              name: '荔枝',
+              unit: '斤',
+              price: 15.00},
+            count:2.00
+          },
+          subtotal:30.00,
+          saved:0.00
+        },
+        {
+          cartItem:
+          {
+            item:{
+              barcode: 'ITEM000005',
+              name: '方便面',
+              unit: '袋',
+              price: 4.50},
+            count:3
+          },
+          subtotal:9.00,
+          saved:4.50
+        }
+      ];
+      expect(buildReceiptItems(cartItem,promotions)).toEqual(subtotalItems);
+    });
+  });
 });
