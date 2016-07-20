@@ -161,4 +161,97 @@ describe('unit test',()=> {
       expect(buildReceiptItems(cartItem,promotions)).toEqual(subtotalItems);
     });
   });
+  describe('getTotal',() => {
+    let subtotalItems=[
+      {
+        cartItem:
+        {
+          item: {
+            barcode: 'ITEM000001',
+            name: '雪碧',
+            unit: '瓶',
+            price: 3.00
+          },
+          count:5
+        },
+        subtotal:12.00,
+        saved:3.00
+      },
+
+      {
+        cartItem:
+        {
+          item:{
+            barcode: 'ITEM000003',
+            name: '荔枝',
+            unit: '斤',
+            price: 15.00},
+          count:2.00
+        },
+        subtotal:30.00,
+        saved:0.00
+      },
+      {
+        cartItem:
+        {
+          item:{
+            barcode: 'ITEM000005',
+            name: '方便面',
+            unit: '袋',
+            price: 4.50},
+          count:3
+        },
+        subtotal:9.00,
+        saved:4.50
+      }
+    ];
+    it('should return totalItems',()=>{
+      let totalItems = {
+        itemsSubtotal: [
+          {
+            cartItem: {
+              item: {
+                barcode: 'ITEM000001',
+                name: '雪碧',
+                unit: '瓶',
+                price: 3.00
+              },
+              count: 5
+            },
+            subtotal: 12.00,
+            saved: 3.00
+          },
+          {
+            cartItem: {
+              item: {
+                barcode: 'ITEM000003',
+                name: '荔枝',
+                unit: '斤',
+                price: 15.00
+              },
+              count: 2
+            },
+            subtotal: 30,
+            saved: 0.00
+          },
+          {
+            cartItem: {
+              item: {
+                barcode: 'ITEM000005',
+                name: '方便面',
+                unit: '袋',
+                price: 4.50
+              },
+              count: 3
+            },
+            subtotal: 9,
+            saved: 4.5
+          }
+        ],
+        total: 51.00,
+        savedTotal: 7.50
+      }
+      expect(buildReceipt(subtotalItems)).toEqual(totalItems);
+    })
+  })
 });
